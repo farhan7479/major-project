@@ -16,8 +16,10 @@
  \geometry{
  right=25mm,
  left=35mm,
- top=25mm,
- bottom=25mm,
+ top=20mm,    % Reduced top margin
+ bottom=20mm, % Reduced bottom margin
+ headheight=14pt,
+ headsep=10pt    % Reduced space between header and text
  }
 % \usepackage{fontspec}
 \usepackage{tocloft}
@@ -41,15 +43,31 @@
 \xpatchcmd{\@makeschapterhead}{%
   \Huge \bfseries  #1\par\nobreak%
 }{%
-  \Huge \bfseries\centering #1\par\nobreak%
+  \Large \bfseries\centering #1\par\nobreak%
 }{\typeout{Patched makeschapterhead}}{\typeout{patching of @makeschapterhead failed}}
 
 
 \xpatchcmd{\@makechapterhead}{%
   \huge\bfseries \@chapapp\space \thechapter
 }{%
-  \huge\bfseries\centering \@chapapp\space \thechapter
+  \Large\bfseries\centering \@chapapp\space \thechapter
 }{\typeout{Patched @makechapterhead}}{\typeout{Patching of @makechapterhead failed}}
+
+% Adjust chapter spacing
+\def\@makechapterhead#1{%
+  \vspace*{10pt}% Reduced from default 50pt
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \Large\bfseries\centering \@chapapp\space \thechapter
+        \par\nobreak
+        \vskip 10pt% Reduced space between number and title
+      \fi
+    \fi
+    \interlinepenalty\@M
+    \Large \bfseries #1\par\nobreak
+    \vskip 20pt% Reduced space after title
+  }}
 
 \makeatother
 %The above Section make chapter and its name to center of the page
@@ -655,12 +673,7 @@ The training process is designed for optimal model performance:
     \item Gradient clipping
   \end{itemize}
 \end{itemize}
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.6]{dtu.jpg}
-    \caption{Sample Image}
-    \label{fig:sample image}
-\end{figure}
+
 
 \begin{table}[htbp]
 \caption{Sample Table}
