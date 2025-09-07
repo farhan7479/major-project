@@ -81,7 +81,7 @@
 \makeatother
 %The above Section make chapter and its name to center of the page
 %\unwanted packages also included
-\linespread{1.5}
+\linespread{1.2}
 %\pagestyle{fancy}
 %\fancyhead{}
 %\header and footer section
@@ -290,11 +290,11 @@ This project develops an AI-based electricity load and peak demand forecasting s
 \addcontentsline{toc}{chapter}{Acknowledgement}
 
 \chapter*{\centering \large ACKNOWLEDGEMENT\markboth{Acknowledgements}{Acknowledgements}}
-\vspace{-1cm}
+\vspace{0.5cm}
 
 The successful completion of any task is incomplete and meaningless without giving any due credit to the people who made it possible without which the project would not have been successful and would have existed in theory.
 
-First and foremost, we are grateful to \textbf{Dr. J. N. Rai}, HOD, Department of Electrical Engineering, Delhi Technological University, and all other faculty members of our department for their constant guidance and support, constant motivation and sincere support and gratitude for this project work. We owe a lot of thanks to our supervisor, \textbf{Prof. J. N. Rai}, Professor, Department of Electrical Engineering, Delhi Technological University for igniting and constantly motivating us and guiding us in the idea of a creatively and amazingly performed Major Project in undertaking this endeavor and challenge and also for being there whenever we needed his guidance or assistance.
+First and foremost, we are grateful to \textbf{Prof. Rachana Garg}, HOD, Department of Electrical Engineering, Delhi Technological University, and all other faculty members of our department for their constant guidance and support, constant motivation and sincere support and gratitude for this project work. We owe a lot of thanks to our supervisor, \textbf{Prof. J. N. Rai}, Professor, Department of Electrical Engineering, Delhi Technological University for igniting and constantly motivating us and guiding us in the idea of a creatively and amazingly performed Major Project in undertaking this endeavor and challenge and also for being there whenever we needed his guidance or assistance.
 
 
 We would also like to take this moment to show our thanks and gratitude to one and all, who indirectly or directly have given us their hand in this challenging task. We feel happy and joyful and content in expressing our vote of thanks to all those who have helped us and guided us in presenting this project work for our Major project. Last, but never least, we thank our well-wishers and parents for always being with us, in every sense and constantly supporting us in every possible sense whenever possible.
@@ -324,7 +324,6 @@ We would also like to take this moment to show our thanks and gratitude to one a
 
 \addcontentsline{toc}{chapter}{List of Figures}
 
-\newpage
 \listoffigures
 \addcontentsline{toc}{chapter}{List of Tables}
 
@@ -372,6 +371,9 @@ Given time-indexed historical load series y(t) with exogenous variables X(t) (we
 
 \section{Objectives}
 \begin{itemize}
+\setlength{\itemsep}{0.2em}
+\setlength{\parskip}{0pt}
+\large
 \item Build a robust data pipeline: cleaning, imputation, lag/rolling/cyclical features, and weather fusion for hourly demand [12][2].
 
 \item Benchmark classical (ARIMA), ML (Random Forest/XGBoost), and DL (LSTM/BiLSTM, CNN-LSTM, TFT) models on open datasets and a local sample [11][8].
@@ -389,6 +391,9 @@ The motivation for this research stems from several critical factors in the evol
 \subsection{Grid Modernization and Complexity}
 Modern power systems are experiencing unprecedented challenges due to:
 \begin{itemize}
+\setlength{\itemsep}{0.2em}
+\setlength{\parskip}{0pt}
+\large
 \item Increasing integration of variable renewable energy sources
 \item Growing adoption of electric vehicles and electrified heating
 \item Rising demands from data centers and AI applications
@@ -398,6 +403,9 @@ Modern power systems are experiencing unprecedented challenges due to:
 \subsection{Economic Impact}
 Research indicates that improving forecast accuracy by just 1\% can result in operational cost savings of millions of dollars annually for large utilities. Accurate demand forecasting enables:
 \begin{itemize}
+\setlength{\itemsep}{0.2em}
+\setlength{\parskip}{0pt}
+\large
 \item Optimal generation scheduling
 \item Reduced spinning reserves
 \item Minimized fuel costs
@@ -407,6 +415,9 @@ Research indicates that improving forecast accuracy by just 1\% can result in op
 \subsection{Environmental Considerations}
 Enhanced forecasting capabilities contribute to environmental sustainability through:
 \begin{itemize}
+\setlength{\itemsep}{0.2em}
+\setlength{\parskip}{0pt}
+\large
 \item Better integration of renewable energy sources
 \item Reduced greenhouse gas emissions from backup generation
 \item Optimized energy storage utilization
@@ -416,6 +427,9 @@ Enhanced forecasting capabilities contribute to environmental sustainability thr
 \subsection{Technological Advancement}
 Recent breakthroughs in AI and deep learning present unprecedented opportunities:
 \begin{itemize}
+\setlength{\itemsep}{0.2em}
+\setlength{\parskip}{0pt}
+\large
 \item Deep learning models achieving MAPE values below 2\%
 \item Advanced architectures like transformers and graph neural networks
 \item Improved processing of high-dimensional time series data
@@ -667,24 +681,6 @@ The training process is designed for optimal model performance:
 \end{itemize}
 
 
-\begin{table}[htbp]
-\caption{Sample Table}
-\vspace{0.5cm}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-Units in Hidden Layers & Accuracy & Precision & Recall & F1-score \\
-\hline
-
-100,20,20     &0    & 0 &0 &0    \\
-100,20,20     &0    & 0 &0 &0    \\
-100,20,20     &0    & 0 &0 &0    \\
-100,20,20     &0    & 0 &0 &0    \\
-100,20,20     &0    & 0 &0 &0    \\
-\hline
-\end{tabular}
-}
-\end{table}
 
 
 \chapter{SIMULATION AND IMPLEMENTATION}
