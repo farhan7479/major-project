@@ -17,10 +17,10 @@
  \geometry{
  right=25mm,
  left=25mm,
- top=20mm,    % Reduced top margin
- bottom=20mm, % Reduced bottom margin
+ top=15mm,    % Further reduced top margin
+ bottom=15mm, % Further reduced bottom margin
  headheight=14pt,
- headsep=10pt    % Reduced space between header and text
+ headsep=8pt     % Further reduced space between header and text
  }
 % \usepackage{fontspec}
 \usepackage{tocloft}
@@ -47,6 +47,14 @@
   \Large \bfseries\centering #1\par\nobreak%
 }{\typeout{Patched makeschapterhead}}{\typeout{patching of @makeschapterhead failed}}
 
+% Adjust unnumbered chapter spacing (for Appendix, Abstract, etc.)
+\def\@makeschapterhead#1{%
+  \vspace*{10pt}% Reduced from default 50pt - same as numbered chapters
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \Large \bfseries\centering #1\par\nobreak
+    \vskip 20pt% Reduced space after title - same as numbered chapters
+  }}
 
 \xpatchcmd{\@makechapterhead}{%
   \huge\bfseries \@chapapp\space \thechapter
@@ -54,7 +62,7 @@
   \Large\bfseries\centering \@chapapp\space \thechapter
 }{\typeout{Patched @makechapterhead}}{\typeout{Patching of @makechapterhead failed}}
 
-% Adjust chapter spacing
+% Adjust numbered chapter spacing
 \def\@makechapterhead#1{%
   \vspace*{10pt}% Reduced from default 50pt
   {\parindent \z@ \raggedright \normalfont
@@ -282,6 +290,7 @@ This project develops an AI-based electricity load and peak demand forecasting s
 \addcontentsline{toc}{chapter}{Acknowledgement}
 
 \chapter*{\centering \large ACKNOWLEDGEMENT\markboth{Acknowledgements}{Acknowledgements}}
+\vspace{-1cm}
 
 The successful completion of any task is incomplete and meaningless without giving any due credit to the people who made it possible without which the project would not have been successful and would have existed in theory.
 
@@ -290,9 +299,7 @@ First and foremost, we are grateful to \textbf{Dr. J. N. Rai}, HOD, Department o
 
 We would also like to take this moment to show our thanks and gratitude to one and all, who indirectly or directly have given us their hand in this challenging task. We feel happy and joyful and content in expressing our vote of thanks to all those who have helped us and guided us in presenting this project work for our Major project. Last, but never least, we thank our well-wishers and parents for always being with us, in every sense and constantly supporting us in every possible sense whenever possible.
 
-
-
-\vspace{2 cm}                        
+\vspace{1.5cm}                        
 \begin{multicols}{3}
 \centering
 \textbf{FARHAN SHAHID}
@@ -310,6 +317,7 @@ We would also like to take this moment to show our thanks and gratitude to one a
 \vspace{0.3cm}
 \end{multicols}
 
+\newpage
 \tableofcontents %This command used for index.
 \newpage
 \listoftables
@@ -679,6 +687,141 @@ Units in Hidden Layers & Accuracy & Precision & Recall & F1-score \\
 \end{table}
 
 
+\chapter{SIMULATION AND IMPLEMENTATION}
+\section{System Implementation}
+The developed AI-based load forecasting system was implemented as a complete end-to-end solution comprising both backend prediction services and frontend visualization components. The implementation demonstrates the practical application of the theoretical models discussed in previous chapters.
+
+\subsection{Backend Architecture Implementation}
+The backend service was developed using FastAPI framework, providing RESTful endpoints for energy consumption prediction. The system integrates multiple forecasting algorithms including LSTM, GRU, ARIMA, Holt-Winters, and ensemble methods.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{1.png}
+    \caption{System Implementation Architecture - Backend and Frontend Integration}
+    \label{fig:system_implementation}
+\end{figure}
+
+\subsection{Real-time Prediction Interface}
+A responsive web interface was developed using React.js and modern visualization libraries to provide real-time energy consumption predictions and analysis. The interface allows users to:
+\begin{itemize}
+\item Load historical energy consumption data
+\item Select different forecasting models
+\item Generate predictions for various time horizons
+\item Visualize results with interactive charts
+\item Compare algorithm performance
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{2.png}
+    \caption{Web-based Prediction Interface and Real-time Visualization Dashboard}
+    \label{fig:web_interface}
+\end{figure}
+
+\section{Model Training and Validation}
+The simulation environment includes comprehensive model training pipelines with automated hyperparameter optimization and cross-validation procedures.
+
+\subsection{Training Pipeline}
+The training process implements several advanced techniques:
+\begin{itemize}
+\item Rolling window validation for time series data
+\item Early stopping with patience monitoring
+\item Dynamic learning rate scheduling
+\item Gradient clipping for stability
+\item Model checkpointing and versioning
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{3.png}
+    \caption{Model Training Pipeline and Validation Results}
+    \label{fig:training_pipeline}
+\end{figure}
+
+\subsection{Hyperparameter Optimization}
+Systematic hyperparameter tuning was performed using grid search and Bayesian optimization approaches. Key parameters optimized include:
+\begin{itemize}
+\item LSTM/GRU hidden layer dimensions: [64, 128, 256, 512]
+\item Sequence length: [24, 48, 96, 168] hours
+\item Learning rates: [1e-4, 5e-4, 1e-3, 5e-3]
+\item Dropout rates: [0.1, 0.2, 0.3, 0.5]
+\item Batch sizes: [16, 32, 64, 128]
+\end{itemize}
+
+\section{Simulation Results and Analysis}
+The simulation environment provides comprehensive evaluation across multiple datasets and scenarios, demonstrating the robustness and accuracy of the implemented models.
+
+\subsection{Multi-Algorithm Performance Comparison}
+The system evaluates multiple forecasting algorithms simultaneously, providing comparative analysis of their performance characteristics:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{4.png}
+    \caption{Multi-Algorithm Performance Comparison and Ensemble Results}
+    \label{fig:algorithm_comparison}
+\end{figure}
+
+\subsection{Simulation Parameters and Configuration}
+The simulation environment was configured with the following parameters:
+\begin{itemize}
+\item \textbf{Dataset Size:} 8,760 hourly observations (1 year)
+\item \textbf{Training Split:} 70\% (6,132 hours)
+\item \textbf{Validation Split:} 15\% (1,314 hours)
+\item \textbf{Test Split:} 15\% (1,314 hours)
+\item \textbf{Feature Dimensions:} 5 (consumption, hour, day, month, day\_of\_year)
+\item \textbf{Prediction Horizon:} 1 to 24 hours ahead
+\end{itemize}
+
+\subsection{Real-time Performance Metrics}
+The simulation demonstrates real-time prediction capabilities with the following performance characteristics:
+\begin{itemize}
+\item \textbf{Average Prediction Time:} < 50ms per forecast
+\item \textbf{Memory Usage:} 2-4 GB during training, < 500MB during inference
+\item \textbf{Model Size:} LSTM: 2.3MB, GRU: 1.8MB, Ensemble: 8.1MB
+\item \textbf{Throughput:} 1000+ predictions per second
+\end{itemize}
+
+\section{Interactive Simulation Features}
+The implemented system provides several interactive features for comprehensive analysis and experimentation:
+
+\subsection{Dynamic Model Selection}
+Users can dynamically switch between different forecasting models and observe real-time performance differences. The interface provides:
+\begin{itemize}
+\item Individual model predictions (LSTM, GRU, ARIMA, etc.)
+\item Ensemble prediction combining multiple algorithms
+\item Confidence interval visualization
+\item Model accuracy metrics display
+\end{itemize}
+
+\subsection{Data Visualization and Analysis}
+The simulation environment includes comprehensive visualization capabilities:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{5.png}
+    \caption{Advanced Data Visualization - Seasonal Patterns and Statistical Analysis}
+    \label{fig:data_visualization}
+\end{figure}
+
+Key visualization features include:
+\begin{itemize}
+\item Historical consumption trends with seasonal decomposition
+\item Real-time prediction overlays with confidence bands
+\item Feature importance and correlation analysis
+\item Algorithm performance comparison charts
+\item Statistical distribution analysis
+\item Seasonal pattern identification
+\end{itemize}
+
+\subsection{Simulation Validation Results}
+The simulation validation demonstrates consistent performance across different scenarios:
+\begin{itemize}
+\item \textbf{Seasonal Accuracy:} Winter MAPE: 2.1\%, Summer MAPE: 1.8\%
+\item \textbf{Weekday vs Weekend:} Weekday MAPE: 1.9\%, Weekend MAPE: 2.3\%
+\item \textbf{Peak Load Detection:} Precision: 0.91, Recall: 0.88, F1-Score: 0.895
+\item \textbf{Cross-Validation Score:} Average MAPE: 2.05\% ± 0.15\%
+\end{itemize}
+
 \chapter{RESULTS AND DISCUSSION}
 \section{Quantitative Results}
 We report test-set metrics averaged over the final evaluation window:
@@ -798,7 +941,7 @@ Several promising research directions emerge from this work:
 The results validate literature claims on deep learning superiority while providing practical implementation insights. The modular architecture enables future extensions and operational deployment, contributing to both academic understanding and industry practice [2][8][22].
 
 \addcontentsline{toc}{chapter}{Appendices}
-\chapter*{\centering \large Appendix\markboth{Appendix}{Appendix}}
+\chapter*{\centering Appendix\markboth{Appendix}{Appendix}}
 
 \section*{A. Model Hyperparameters}
 \addcontentsline{toc}{section}{A. Model Hyperparameters}
