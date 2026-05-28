@@ -1,0 +1,50 @@
+{
+  "buildings": [
+    "Hog_office_Lizzie",
+    "Hog_office_Myles",
+    "Hog_office_Sydney"
+  ],
+  "test_period": {
+    "start": "2017-09-14T09:00:00",
+    "end": "2017-12-31T23:00:00"
+  },
+  "val_period": {
+    "start": "2017-05-28T19:00:00",
+    "end": "2017-09-14T08:00:00"
+  },
+  "tabular_feature_columns": [
+    "lag_1",
+    "lag_24",
+    "lag_168",
+    "roll_mean_3",
+    "roll_std_3",
+    "roll_mean_6",
+    "roll_std_6",
+    "roll_mean_12",
+    "roll_std_12",
+    "roll_mean_24",
+    "roll_std_24",
+    "hour",
+    "dayofweek",
+    "month",
+    "hour_sin",
+    "hour_cos",
+    "doy_sin",
+    "doy_cos",
+    "is_weekend",
+    "is_peak_hour",
+    "is_holiday",
+    "airTemperature",
+    "cloudCoverage",
+    "dewTemperature",
+    "precipDepth1HR",
+    "precipDepth6HR",
+    "seaLvlPressure",
+    "windDirection",
+    "windSpeed",
+    "bld_Hog_office_Lizzie",
+    "bld_Hog_office_Myles",
+    "bld_Hog_office_Sydney"
+  ],
+  "seq_len": 168
+}

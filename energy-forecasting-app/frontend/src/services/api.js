@@ -1,59 +1,37 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_BASE_URL = 'http://localhost:8000';
+const client = axios.create({
+  baseURL: "http://localhost:8000",
+  headers: { "Content-Type": "application/json" },
+});
 
-class EnergyForecastingAPI {
-  constructor() {
-    this.client = axios.create({
-      baseURL: API_BASE_URL,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  }
+export const api = {
+  health: () => client.get("/health").then((r) => r.data),
+  getModels: () => client.get("/models").then((r) => r.data.models),
+  getBuildings: () =>
+    client.get("/buildings").then((r) => ({
+      buildings: r.data.buildings,
+      testPeriod: r.data.test_period,
+    })),
+  getMetrics: () => client.get("/metrics").then((r) => r.data.leaderboard),
+  forecast: ({ model, buildingId, targetDatetime, weatherOverride }) =>
+    client
+      .post("/forecast", {
+        model,
+        building_id: buildingId,
+        target_datetime: targetDatetime,
+        weather_override: weatherOverride ?? undefined,
+      })
+      .then((r) => r.data),
+  batchForecast: ({ models, buildingId, targetDatetime, weatherOverride }) =>
+    client
+      .post("/batch-forecast", {
+        models,
+        building_id: buildingId,
+        target_datetime: targetDatetime,
+        weather_override: weatherOverride ?? undefined,
+      })
+      .then((r) => r.data),
+};
 
-  async getSampleData(hours = 168) {
-    try {
-      const response = await this.client.get(`/sample-data?hours=${hours}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching sample data:', error);
-      throw error;
-    }
-  }
-
-  async predictEnergyConsumption(data, modelType = 'both') {
-    try {
-      const response = await this.client.post('/predict', {
-        data: data,
-        model_type: modelType
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Error making prediction:', error);
-      throw error;
-    }
-  }
-
-  async getModelInfo() {
-    try {
-      const response = await this.client.get('/model-info');
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching model info:', error);
-      throw error;
-    }
-  }
-
-  async healthCheck() {
-    try {
-      const response = await this.client.get('/health');
-      return response.data;
-    } catch (error) {
-      console.error('Error checking health:', error);
-      throw error;
-    }
-  }
-}
-
-export default new EnergyForecastingAPI();
+export default api;

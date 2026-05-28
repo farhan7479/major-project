@@ -1,0 +1,6 @@
+{
+  "venvPath": ".",
+  "venv": ".venv",
+  "include": ["ml"],
+  "pythonVersion": "3.12"
+}
